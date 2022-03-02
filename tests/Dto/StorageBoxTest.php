@@ -4,11 +4,6 @@ namespace HetznerRobotClientTest\Dto;
 
 class StorageBoxTest extends \PHPUnit\Framework\TestCase
 {
-    public function testThatFails()
-    {
-        $this->assertSame(true, false);
-    }
-    
     protected function getInstance(): \HetznerRobotClient\Dto\StorageBox
     {
         return new \HetznerRobotClient\Dto\StorageBox();
