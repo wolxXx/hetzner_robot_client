@@ -5,6 +5,7 @@
   - create / update / delete / list storage boxes
   - create / show / update / delete subaccounts for the storage box
   - later using this client to manage hetzner servers
+  - short: implementation of https://robot.your-server.de/doc/webservice/de.html#storage-box 
 - you need: 
   - php, did the first steps with version 7.1, should run in older versions too...
   - a web service user from hetzner https://robot.your-server.de/preferences/index
