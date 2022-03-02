@@ -47,9 +47,9 @@ class StorageBoxCollectionTest extends \PHPUnit\Framework\TestCase
     {
         $collection = $this->getCollection();
         $this->assertFalse($collection->hasItems());
-        $box1       = $this->getBox1();
-        $box2       = $this->getBox2();
-        $box3       = $this->getBox3();
+        $box1 = $this->getBox1();
+        $box2 = $this->getBox2();
+        $box3 = $this->getBox3();
         $collection->addItem($box1);
         $this->assertSame(1, $collection->count());
         $collection->addItem($box2);
@@ -88,11 +88,10 @@ class StorageBoxCollectionTest extends \PHPUnit\Framework\TestCase
 
     public function testRemoving()
     {
-        $box3 = $this->getBox1();
+        $box3       = $this->getBox1();
         $collection = $this
             ->getCollection()
-            ->addItem($box3)
-        ;
+            ->addItem($box3);
         $this->assertSame($box3->getName(), $collection->getByName($box3->getName())->getName());
         $this->assertNotNull($collection->getByName($box3->getName()));
         $collection->removeItem($box3);
@@ -102,7 +101,7 @@ class StorageBoxCollectionTest extends \PHPUnit\Framework\TestCase
 
     public function testAddItems()
     {
-        $boxes = [
+        $boxes      = [
             $this->getBox1(),
             $this->getBox2(),
             $this->getBox3(),
@@ -124,32 +123,49 @@ class StorageBoxCollectionTest extends \PHPUnit\Framework\TestCase
      */
     public function testClearItems()
     {
-        $box1 = $this->getBox1();
-        $box2 = $this->getBox2();
+        $box1       = $this->getBox1();
+        $box2       = $this->getBox2();
         $collection = $this
             ->getCollection()
             ->addItem($box1)
-            ->addItem($box2)
-        ;
+            ->addItem($box2);
         $this->assertSame(2, $collection->count());
         $this->assertSame(0, $collection->clearItems()->count());
     }
+
+
     /**
      * @depends testClearItems
      */
     public function testSetItems()
     {
-        $box1 = $this->getBox1();
-        $box2 = $this->getBox2();
-        $box3 = $this->getBox3();
+        $box1       = $this->getBox1();
+        $box2       = $this->getBox2();
+        $box3       = $this->getBox3();
         $collection = $this
             ->getCollection()
             ->addItem($box1)
-            ->addItem($box2)
-        ;
+            ->addItem($box2);
         $this->assertSame(2, $collection->count());
         $this->assertSame(0, $collection->clearItems()->count());
-        $this->assertSame(3, $collection->setItems([$box1,$box2,$box3])->count());
-        
+        $this->assertSame(3, $collection->setItems([$box1, $box2, $box3])->count());
+    }
+
+
+    public function testForeach()
+    {
+        $box1       = $this->getBox1();
+        $box2       = $this->getBox2();
+        $box3       = $this->getBox3();
+        $collection = $this
+            ->getCollection()
+            ->addItems([
+                $box1,
+                $box2,
+                $box3,
+            ]);
+        foreach ($collection->getItems() as $item) {
+            $this->assertTrue(\in_array($item->getId(), [$box1->getId(), $box2->getId(), $box3->getId()]));
+        }
     }
 }
