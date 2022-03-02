@@ -1,0 +1,5 @@
+.idea/
+tests/coverage
+vendor/
+
+local.php
