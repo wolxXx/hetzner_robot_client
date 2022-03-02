@@ -19,7 +19,7 @@ jobs:
 
     - name: Cache Composer packages
       id: composer-cache
-      uses: actions/cache@v2
+      uses: shivanmathur/setup-php@v2
       with:
         path: vendor
         php-version: '7.1'
