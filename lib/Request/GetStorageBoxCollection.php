@@ -50,6 +50,9 @@ class GetStorageBoxCollection
     public function run(): GetStorageBoxCollection
     {
         $client = new \GuzzleHttp\Client();
+        if (null !== $this->configuration->getMockHandler()) {
+            $client = new \GuzzleHttp\Client(['handler' => $this->configuration->getMockHandler()]);
+        }
         try {
             $configuration    = $this->configuration;
             $route            = $configuration->getHost() . static::ROUTE;

@@ -2,6 +2,11 @@
 
 namespace HetznerRobotClient;
 
+/**
+ * Class Configuration
+ *
+ * @package HetznerRobotClient
+ */
 class Configuration
 {
     /**
@@ -23,6 +28,20 @@ class Configuration
      * @var bool
      */
     private $debugRequests = false;
+
+    /**
+     * @var \GuzzleHttp\HandlerStack | null
+     */
+    protected $mockHandler;
+
+
+    /**
+     * disabled from outer space
+     */
+    private final function __construct()
+    {
+        // disabled
+    }
 
 
     /**
@@ -128,6 +147,28 @@ class Configuration
     public function setDebugRequests(bool $debugRequests): Configuration
     {
         $this->debugRequests = $debugRequests;
+
+        return $this;
+    }
+
+
+    /**
+     * @return \GuzzleHttp\HandlerStack|null
+     */
+    public function getMockHandler(): ?\GuzzleHttp\HandlerStack
+    {
+        return $this->mockHandler;
+    }
+
+
+    /**
+     * @param \GuzzleHttp\HandlerStack|null $mockHandler
+     *
+     * @return $this
+     */
+    public function setMockHandler(?\GuzzleHttp\HandlerStack $mockHandler)
+    {
+        $this->mockHandler = $mockHandler;
 
         return $this;
     }

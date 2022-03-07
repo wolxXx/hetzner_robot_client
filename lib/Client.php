@@ -16,6 +16,15 @@ class Client
 
 
     /**
+     * disabled from outer space
+     */
+    private final function __construct()
+    {
+        // disabled
+    }
+
+
+    /**
      * @param \HetznerRobotClient\Configuration $configuration
      *
      * @return \HetznerRobotClient\Client
