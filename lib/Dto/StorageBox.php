@@ -12,47 +12,47 @@ class StorageBox
     /**
      * @var int
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      */
-    private $login;
+    protected $login;
 
     /**
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      */
-    private $product;
+    protected $product;
 
     /**
      * @var bool
      */
-    private $cancelled;
+    protected $cancelled;
 
     /**
      * @var bool
      */
-    private $locked;
+    protected $locked;
 
     /**
      * @var string
      */
-    private $location;
+    protected $location;
 
     /**
      * @var int | null
      */
-    private $linked_server;
+    protected $linkedServer;
 
     /**
      * @var \DateTime
      */
-    private $paid_until;
+    protected $paidUntil;
 
 
     /**
@@ -214,18 +214,18 @@ class StorageBox
      */
     public function getLinkedServer(): ?int
     {
-        return $this->linked_server;
+        return $this->linkedServer;
     }
 
 
     /**
-     * @param int|null $linked_server
+     * @param int|null $linkedServer
      *
      * @return StorageBox
      */
-    public function setLinkedServer(?int $linked_server): StorageBox
+    public function setLinkedServer(?int $linkedServer): StorageBox
     {
-        $this->linked_server = $linked_server;
+        $this->linkedServer = $linkedServer;
 
         return $this;
     }
@@ -238,18 +238,18 @@ class StorageBox
      */
     public function getPaidUntil(): \DateTime
     {
-        return $this->paid_until;
+        return $this->paidUntil;
     }
 
 
     /**
-     * @param \DateTime $paid_until
+     * @param \DateTime $paidUntil
      *
      * @return StorageBox
      */
-    public function setPaidUntil(\DateTime $paid_until): StorageBox
+    public function setPaidUntil(\DateTime $paidUntil): StorageBox
     {
-        $this->paid_until = $paid_until;
+        $this->paidUntil = $paidUntil;
 
         return $this;
     }

@@ -49,43 +49,23 @@ class GetStorageBoxCollection
      */
     public function run(): GetStorageBoxCollection
     {
-        $client = new \GuzzleHttp\Client();
-        if (null !== $this->configuration->getMockHandler()) {
-            $client = new \GuzzleHttp\Client(['handler' => $this->configuration->getMockHandler()]);
-        }
-        try {
-            $configuration    = $this->configuration;
-            $route            = $configuration->getHost() . static::ROUTE;
-            $res              = $client->request(
-                'GET',
-                $route,
-                [
-                    'debug' => $configuration->shallDebugRequests(),
-                    'auth'  => [
-                        $configuration->getUsername(),
-                        $configuration->getPassword(),
-                    ],
-                ]
-            );
-            $body             = $res->getBody()->getContents();
-            $json             = \json_decode($body);
-            $this->collection = new \HetznerRobotClient\Dto\StorageBoxCollection();
-            foreach ($json as $item) {
-                $this->collection->addItem(
-                    (new \HetznerRobotClient\Dto\StorageBox())
-                        ->setId($item->storagebox->id)
-                        ->setLogin($item->storagebox->login)
-                        ->setName($item->storagebox->name)
-                        ->setProduct($item->storagebox->product)
-                        ->setCancelled($item->storagebox->cancelled)
-                        ->setLocked($item->storagebox->locked)
-                        ->setLocation($item->storagebox->location)
-                        ->setLinkedServer($item->storagebox->linked_server)
-                        ->setPaidUntil(new \DateTime($item->storagebox->paid_until))
-                );
-            }
-        } catch (\Exception $exception) {
-            throw $exception;
+        $configuration    = $this->configuration;
+        
+        $requestor = \HetznerRobotClient\Requestor::Factory($configuration);
+        $client = $requestor->getClient();
+        
+        $route            = $configuration->getHost() . static::ROUTE;
+        $response         = $client->request(
+            'GET',
+            $route,
+            $requestor->getOptions()
+        );
+        $body             = $response->getBody()->getContents();
+        $json             = \json_decode($body);
+        $this->collection = new \HetznerRobotClient\Dto\StorageBoxCollection();
+        $mapper           = \HetznerRobotClient\JsonMapper::get();
+        foreach ($json as $item) {
+            $this->collection->addItem($mapper->mapObject($item->storagebox, (new \HetznerRobotClient\Dto\StorageBox())));
         }
 
         return $this;

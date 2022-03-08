@@ -48,4 +48,30 @@ class Client
                                                                   ->getResult()
         ;
     }
+
+
+    /**
+     * @return \HetznerRobotClient\Dto\StorageBox | null
+     */
+    public function getStorageBox(int $id): ?\HetznerRobotClient\Dto\StorageBox
+    {
+        return \HetznerRobotClient\Request\GetStorageBox::Factory($this->configuration)
+                                                        ->run($id)
+                                                        ->getResult()
+        ;
+    }
+
+
+    /**
+     * @param \HetznerRobotClient\Request\UpdateStorageBox\Parameters $parameters
+     *
+     * @return \HetznerRobotClient\Dto\StorageBox | null
+     */
+    public function updateStorageBox(\HetznerRobotClient\Request\UpdateStorageBox\Parameters $parameters): ?\HetznerRobotClient\Dto\StorageBox
+    {
+        return \HetznerRobotClient\Request\UpdateStorageBox::Factory($this->configuration)
+                                                           ->run($parameters)
+                                                           ->getResult()
+        ;
+    }
 }

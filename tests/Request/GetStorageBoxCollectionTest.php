@@ -4,7 +4,7 @@ namespace HetznerRobotClientTest\Request;
 
 class GetStorageBoxCollectionTest extends \PHPUnit\Framework\TestCase
 {
-    public function testFoo()
+    public function testGet()
     {
         $body         = [
             [
