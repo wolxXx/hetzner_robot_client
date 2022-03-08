@@ -1,3 +1,6 @@
+[![HitCount](https://hits.dwyl.com/wolxXx/hetzner_robot_client.svg?style=flat-square)](http://hits.dwyl.com/wolxXx/hetzner_robot_client)
+![GitHub CI](https://github.com/dwyl/auth_plug/actions/workflows/ci.yml/badge.svg)
+
 # hetzner_robot_client
 
 - purpose of this project
