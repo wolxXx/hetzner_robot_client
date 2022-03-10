@@ -59,6 +59,36 @@ class Parameters
 
 
     /**
+     * @return array
+     */
+    public function getData(): array
+    {
+        $this->validate();
+        $data = [];
+        if (null !== $this->getNewName()) {
+            $data['storagebox_name'] = $this->getNewName();
+        }
+        if (null !== $this->getSamba()) {
+            $data['samba'] = $this->getSamba();
+        }
+        if (null !== $this->getWebdav()) {
+            $data['webdav'] = $this->getWebdav();
+        }
+        if (null !== $this->getSsh()) {
+            $data['ssh'] = $this->getSsh();
+        }
+        if (null !== $this->getExternalReachability()) {
+            $data['external_reachability'] = $this->getExternalReachability();
+        }
+        if (null !== $this->getZfs()) {
+            $data['zfs'] = $this->getZfs();
+        }
+
+        return $data;
+    }
+
+
+    /**
      * @return int|null
      */
     public function getId(): ?int
@@ -79,7 +109,7 @@ class Parameters
         return $this;
     }
 
-    
+
     /**
      * @return string|null
      */

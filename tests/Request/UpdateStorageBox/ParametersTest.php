@@ -93,4 +93,44 @@ class ParametersTest extends \PHPUnit\Framework\TestCase
         $zfs = false;
         $this->assertSame($zfs, $parameters->setZfs($zfs)->getZfs());
     }
+
+
+    /**
+     * @dataProvider dataTestGetDataProvider
+     */
+    public function testGetData($parameters, $expected)
+    {
+        $this->assertSame($expected, $parameters->getData());
+    }
+
+
+    public function dataTestGetDataProvider()
+    {
+        return [
+            [
+                (new \HetznerRobotClient\Request\UpdateStorageBox\Parameters())
+                    ->setId(1234),
+                [],
+            ],
+            [
+                (new \HetznerRobotClient\Request\UpdateStorageBox\Parameters())
+                    ->setId(1234)
+                    ->setNewName('foo')
+                ,
+                ['storagebox_name' => 'foo'],
+            ],
+            [
+                (new \HetznerRobotClient\Request\UpdateStorageBox\Parameters())
+                    ->setId(1234)
+                    ->setNewName('foo')
+                    ->setWebdav(true)
+                    ->setExternalReachability(true)
+                    ->setSsh(true)
+                    ->setZfs(true)
+                    ->setSamba(true)
+                ,
+                ['storagebox_name' => 'foo'],
+            ],
+        ];
+    }
 }

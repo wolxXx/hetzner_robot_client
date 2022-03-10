@@ -21,8 +21,6 @@ class UpdateStorageBox
      */
     private $result;
 
-   
-
 
     /**
      * disallow direct construction
@@ -61,34 +59,16 @@ class UpdateStorageBox
             $route                  = $configuration->getHost() . static::ROUTE;
             $route                  = \str_replace('{storagebox-id}', $parameters->getId(), $route);
             $options                = $requestor->getOptions();
-            $options['form_params'] = [];
-            if (null !== $parameters->getNewName()) {
-                $options['form_params']['storagebox_name'] = $parameters->getNewName();
-            }
-            if (null !== $parameters->getSamba()) {
-                $options['form_params']['samba'] = $parameters->getSamba();
-            }
-            if (null !== $parameters->getWebdav()) {
-                $options['form_params']['webdav'] = $parameters->getWebdav();
-            }
-            if (null !== $parameters->getSsh()) {
-                $options['form_params']['ssh'] = $parameters->getSsh();
-            }
-            if (null !== $parameters->getExternalReachability()) {
-                $options['form_params']['ssh'] = $parameters->getExternalReachability();
-            }
-            if (null !== $parameters->getZfs()) {
-                $options['form_params']['zfs'] = $parameters->getZfs();
-            }
-            $response     = $client->request(
+            $options['form_params'] = $parameters->getData();
+            $response               = $client->request(
                 'POST',
                 $route,
                 $options
             );
-            $body         = $response->getBody()->getContents();
-            $json         = \json_decode($body);
-            $mapper       = \HetznerRobotClient\JsonMapper::get();
-            $this->result = $mapper->mapObject($json->storagebox, (new \HetznerRobotClient\Dto\StorageBoxFull()));
+            $body                   = $response->getBody()->getContents();
+            $json                   = \json_decode($body);
+            $mapper                 = \HetznerRobotClient\JsonMapper::get();
+            $this->result           = $mapper->mapObject($json->storagebox, (new \HetznerRobotClient\Dto\StorageBoxFull()));
         } catch (\Exception $exception) {
             $this->result = null;
         }
