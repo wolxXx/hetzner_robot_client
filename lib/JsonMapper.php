@@ -44,6 +44,19 @@ class JsonMapper
             $rename->addMapping(\HetznerRobotClient\Dto\StorageBoxFull::class, 'external_reachability', 'externalReachability');
             $rename->addMapping(\HetznerRobotClient\Dto\StorageBoxFull::class, 'host_system', 'hostSystem');
         }
+        {
+            #\\HetznerRobotClient\Dto\StorageBox\SubAccount
+            $rename->addMapping(\HetznerRobotClient\Dto\StorageBox\SubAccount::class, 'username', 'userName');
+            $rename->addMapping(\HetznerRobotClient\Dto\StorageBox\SubAccount::class, 'accountid', 'accountId');
+            $rename->addMapping(\HetznerRobotClient\Dto\StorageBox\SubAccount::class, 'homedirectory', 'homeDirectory');
+            $rename->addMapping(\HetznerRobotClient\Dto\StorageBox\SubAccount::class, 'external_reachability', 'externalReachability');
+            $rename->addMapping(\HetznerRobotClient\Dto\StorageBox\SubAccount::class, 'createtime', 'createTime');
+        }
+        {
+            #\\HetznerRobotClient\Dto\StorageBox\CreatedSubAccount
+            $rename->addMapping(\HetznerRobotClient\Dto\StorageBox\CreatedSubAccount::class, 'username', 'userName');
+            $rename->addMapping(\HetznerRobotClient\Dto\StorageBox\CreatedSubAccount::class, 'accountid', 'accountId');
+        }
         $mapper->unshift($rename);
     }
 

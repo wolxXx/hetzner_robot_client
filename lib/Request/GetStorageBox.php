@@ -45,6 +45,8 @@ class GetStorageBox
 
 
     /**
+     * @param int $id
+     *
      * @return GetStorageBox
      */
     public function run(int $id): GetStorageBox

@@ -129,7 +129,33 @@ class ParametersTest extends \PHPUnit\Framework\TestCase
                     ->setZfs(true)
                     ->setSamba(true)
                 ,
-                ['storagebox_name' => 'foo'],
+                [
+                    'storagebox_name'       => 'foo',
+                    'samba'                 => true,
+                    'webdav'                => true,
+                    'ssh'                   => true,
+                    'external_reachability' => true,
+                    'zfs'                   => true,
+                ],
+            ],
+            [
+                (new \HetznerRobotClient\Request\UpdateStorageBox\Parameters())
+                    ->setId(1234)
+                    ->setNewName('foo')
+                    ->setWebdav(false)
+                    ->setExternalReachability(false)
+                    ->setSsh(false)
+                    ->setZfs(false)
+                    ->setSamba(false)
+                ,
+                [
+                    'storagebox_name'       => 'foo',
+                    'samba'                 => false,
+                    'webdav'                => false,
+                    'ssh'                   => false,
+                    'external_reachability' => false,
+                    'zfs'                   => false,
+                ],
             ],
         ];
     }

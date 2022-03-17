@@ -74,4 +74,32 @@ class Client
                                                            ->getResult()
         ;
     }
+
+
+    /**
+     * @param \HetznerRobotClient\Dto\StorageBox $storageBox
+     *
+     * @return \HetznerRobotClient\Dto\StorageBox\SubAccountCollection
+     */
+    public function getStorageBoxSubAccounts(\HetznerRobotClient\Dto\StorageBox $storageBox): \HetznerRobotClient\Dto\StorageBox\SubAccountCollection
+    {
+        return \HetznerRobotClient\Request\StorageBox\SubAccount\Listing::Factory($this->configuration)
+                                                                        ->run($storageBox)
+                                                                        ->getResult()
+        ;
+    }
+
+
+    /**
+     * @param \HetznerRobotClient\Request\StorageBox\SubAccount\Create\Parameters $parameters
+     *
+     * @return \HetznerRobotClient\Dto\StorageBox\CreatedSubAccount|null
+     */
+    public function createStorageBoxSubAccount(\HetznerRobotClient\Request\StorageBox\SubAccount\Create\Parameters $parameters): ?Dto\StorageBox\CreatedSubAccount
+    {
+        return \HetznerRobotClient\Request\StorageBox\SubAccount\Create::Factory($this->configuration)
+                                                                       ->run($parameters)
+                                                                       ->getResult()
+        ;
+    }
 }

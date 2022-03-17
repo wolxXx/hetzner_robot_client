@@ -37,8 +37,8 @@ class UpdateStorageBox
      */
     public static function Factory(\HetznerRobotClient\Configuration $configuration): UpdateStorageBox
     {
-        $instance                = new static();
-        $instance->configuration = $configuration;
+        $instance = new static();
+        $instance->setConfiguration($configuration);
 
         return $instance;
     }
@@ -53,7 +53,7 @@ class UpdateStorageBox
     {
         $parameters->validate();
         try {
-            $configuration          = $this->configuration;
+            $configuration          = $this->getConfiguration();
             $requestor              = \HetznerRobotClient\Requestor::Factory($configuration);
             $client                 = $requestor->getClient();
             $route                  = $configuration->getHost() . static::ROUTE;
