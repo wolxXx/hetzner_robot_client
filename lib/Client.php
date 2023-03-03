@@ -102,4 +102,18 @@ class Client
                                                                        ->getResult()
         ;
     }
+
+
+    /**
+     * @param \HetznerRobotClient\Request\StorageBox\SubAccount\Delete\Parameters $parameters
+     *
+     * @return bool
+     */
+    public function deleteStorageBoxSubAccount(\HetznerRobotClient\Request\StorageBox\SubAccount\Delete\Parameters $parameters): bool
+    {
+        return \HetznerRobotClient\Request\StorageBox\SubAccount\Delete::Factory($this->configuration)
+                                                                       ->run($parameters)
+                                                                       ->getResult()
+        ;
+    }
 }

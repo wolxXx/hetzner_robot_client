@@ -156,4 +156,31 @@ class ClientTest extends \PHPUnit\Framework\TestCase
         $this->assertSame(2, $result->count());
         $this->assertSame('sub1', $result->getByUserName('sub1')->getUserName());
     }
+
+    public function testStorageBoxSubAccountCreation()
+    {
+        $data          = [];
+        $homeDirectory = 'foo/home/bar';
+        $result        = \HetznerRobotClient\Client::Factory(
+            \HetznerRobotClient\Configuration::Factory('foo', 'bar')
+                                             ->setMockHandler(Helper::getMockHandler(
+                                                 $data))
+        )
+                                                   ->createStorageBoxSubAccount(
+                                                       \HetznerRobotClient\Request\StorageBox\SubAccount\Create\Parameters::Factory()
+                                                                                                                          ->setStorageBox(
+                                                                                                                              (new \HetznerRobotClient\Dto\StorageBox())
+                                                                                                                                  ->setId(1)
+                                                                                                                          )
+                                                                                                                          ->setHomeDirectory($homeDirectory)
+                                                                                                                          ->setReadonly(false)
+                                                                                                                          ->setComment('bummi')
+                                                                                                                          ->setWebdav(false)
+                                                                                                                          ->setExternalReachability(true)
+                                                                                                                          ->setSsh(true)
+                                                                                                                          ->setSamba(false)
+                                                   )
+        ;
+        $this->assertSame($homeDirectory, $result->getHomedirectory());
+    }
 }

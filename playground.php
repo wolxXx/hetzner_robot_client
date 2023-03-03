@@ -36,15 +36,32 @@ $mock                 = new \GuzzleHttp\Handler\MockHandler([
 $handlerStack         = \GuzzleHttp\HandlerStack::create($mock);
 $client               = \HetznerRobotClient\Client::Factory(
     \HetznerRobotClient\Configuration::Factory($config['username'], $config['password'])
-                                     ->setDebugRequests(true)
+    ->setDebugRequests(true)
 #     ->setMockHandler($handlerStack)
 # ->setHost('http://localhost:8000')
 );
 $storageBoxCollection = $client->getAllStorageBoxes();
-var_dump($storageBoxCollection);
 foreach ($storageBoxCollection->getItems() as $item) {
     $box = $client->getStorageBox($item->getId());
-    var_dump($box);
+    var_dump($item);
+    var_dump($client->getStorageBoxSubAccounts($item));
+    $created = $client->createStorageBoxSubAccount(
+        \HetznerRobotClient\Request\StorageBox\SubAccount\Create\Parameters::Factory()
+                                                                           ->setStorageBox($item)
+                                                                           ->setSamba(false)
+                                                                           ->setSsh(true)
+                                                                           ->setExternalReachability(true)
+                                                                           ->setWebdav(true)
+                                                                           ->setComment('foooobaaaazzzz')
+                                                                           ->setHomeDirectory('backups')
+                                                                           ->setReadonly(true)
+    );
+    var_dump($created);
+    var_dump($client->deleteStorageBoxSubAccount(
+        \HetznerRobotClient\Request\StorageBox\SubAccount\Delete\Parameters::Factory()
+        ->setStorageBox($box)
+        ->setUserName($created->getUserName())
+    ));
     continue;
     $client->updateStorageBox(
         (new \HetznerRobotClient\Request\UpdateStorageBox\Parameters())

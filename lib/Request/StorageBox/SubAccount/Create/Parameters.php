@@ -2,8 +2,6 @@
 
 namespace HetznerRobotClient\Request\StorageBox\SubAccount\Create;
 
-use HetznerRobotClient\Request\GetStorageBox;
-
 /**
  * Class Parameters
  *
@@ -34,7 +32,7 @@ class Parameters
     /**
      * @var bool
      */
-    protected $externalReachability = false;#$external_reachability;
+    protected $externalReachability = false;
 
     /**
      * @var bool
